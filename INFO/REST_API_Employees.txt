@@ -1,0 +1,125 @@
+REST API User Documentation
+
+Postman for Testing REST API:
+You can use Postman for testing the REST API endpoints: https://www.postman.com/
+
+1) Retrieve All Data
+GET
+http://localhost:8080/api/v1/employees
+
+2) Create Data
+POST
+http://localhost:8080/api/v1/employees
+
+Postman Settings:
+- Body: raw
+- Type: JSON
+
+Important Note: Use camelCase for keys (e.g., firstName instead of first_name). Using first_name may result in a null value error.
+
+Sample Requests:
+
+(1)
+{
+    "firstName": "Alice",
+    "lastName": "Green",
+    "phoneNumber": "alice@mail.com",
+    "position": "DevOps"
+}
+
+(2)
+{
+    "firstName": "Bob",
+    "lastName": "Smith",
+    "phoneNumber": "bob@mail.com",
+    "position": "Software Engineer"
+}
+
+(3)
+{
+    "firstName": "Charlie",
+    "lastName": "Brown",
+    "phoneNumber": "charlie@mail.com",
+    "position": "Product Manager"
+}
+
+(4)
+{
+    "firstName": "Diana",
+    "lastName": "White",
+    "phoneNumber": "diana@mail.com",
+    "position": "Data Scientist"
+}
+
+(5)
+{
+    "firstName": "Edward",
+    "lastName": "Johnson",
+    "phoneNumber": "edward@mail.com",
+    "position": "UX Designer"
+}
+
+3) Retrieve Data by ID
+GET
+http://localhost:8080/api/v1/employees/{id}
+
+Example:
+GET
+http://localhost:8080/api/v1/employees/2
+
+4) Update Data by ID
+PUT
+http://localhost:8080/api/v1/employees/{id}
+
+Postman Settings:
+- Body: raw
+- Type: JSON
+
+Sample Requests:
+
+(1)
+PUT
+http://localhost:8080/api/v1/employees/4
+{
+    "lastName": "Moon",
+    "email": "moon@mail.com"
+}
+
+(2)
+PUT
+http://localhost:8080/api/v1/employees/2
+{
+    "email": "johnny@mail.com"
+}
+
+5) Retrieve Data by First Name
+GET
+http://localhost:8080/api/v1/employees/first-name/{firstName}
+
+Examples:
+GET
+http://localhost:8080/api/v1/employees/first-name/Alice
+GET
+http://localhost:8080/api/v1/employees/first-name/John
+GET
+http://localhost:8080/api/v1/employees/first-name/Sam (not found)
+
+6) Retrieve Data by Last Name
+GET
+http://localhost:8080/api/v1/employees/last-name/{lastName}
+
+Examples:
+GET
+http://localhost:8080/api/v1/employees/last-name/Man
+GET
+http://localhost:8080/api/v1/employees/last-name/Sunny
+GET
+http://localhost:8080/api/v1/employees/last-name/Wolf (not found)
+
+7) Delete Data by ID
+DELETE
+http://localhost:8080/api/v1/employees/{id}
+
+Example:
+DELETE
+http://localhost:8080/api/v1/employees/4

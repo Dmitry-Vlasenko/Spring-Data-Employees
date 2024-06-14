@@ -1,0 +1,375 @@
+{
+    "info": {
+        "name": "Employee API Collection",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Retrieve All Data",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "http://localhost:8080/api/v1/employees",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8080",
+                    "path": [
+                        "api",
+                        "v1",
+                        "employees"
+                    ]
+                }
+            },
+            "response": [],
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "pm.test(\"Status code is 200\", function () {",
+                            "    pm.response.to.have.status(200);",
+                            "});",
+                            "",
+                            "pm.test(\"Response is an array\", function () {",
+                            "    pm.expect(pm.response.json()).to.be.an('array');",
+                            "});"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Create Data",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"firstName\": \"Alice\",\n\t\"lastName\": \"Green\",\n\t\"phoneNumber\": \"alice@mail.com\",\n\t\"position\": \"DevOps\"\n}"
+                },
+                "url": {
+                    "raw": "http://localhost:8080/api/v1/employees",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8080",
+                    "path": [
+                        "api",
+                        "v1",
+                        "employees"
+                    ]
+                }
+            },
+            "response": [],
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "pm.test(\"Status code is 201\", function () {",
+                            "    pm.response.to.have.status(201);",
+                            "});",
+                            "",
+                            "pm.test(\"Response contains all fields\", function () {",
+                            "    const jsonData = pm.response.json();",
+                            "    pm.expect(jsonData).to.have.property(\"id\");",
+                            "    pm.expect(jsonData).to.have.property(\"firstName\", \"Alice\");",
+                            "    pm.expect(jsonData).to.have.property(\"lastName\", \"Green\");",
+                            "    pm.expect(jsonData).to.have.property(\"phoneNumber\", \"alice@mail.com\");",
+                            "    pm.expect(jsonData).to.have.property(\"position\", \"DevOps\");",
+                            "});"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Retrieve Data by ID",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "http://localhost:8080/api/v1/employees/2",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8080",
+                    "path": [
+                        "api",
+                        "v1",
+                        "employees",
+                        "2"
+                    ]
+                }
+            },
+            "response": [],
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "pm.test(\"Status code is 200\", function () {",
+                            "    pm.response.to.have.status(200);",
+                            "});",
+                            "",
+                            "pm.test(\"Response contains all fields\", function () {",
+                            "    const jsonData = pm.response.json();",
+                            "    pm.expect(jsonData).to.have.property(\"id\", 2);",
+                            "    pm.expect(jsonData).to.have.property(\"firstName\");",
+                            "    pm.expect(jsonData).to.have.property(\"lastName\");",
+                            "    pm.expect(jsonData).to.have.property(\"phoneNumber\");",
+                            "    pm.expect(jsonData).to.have.property(\"position\");",
+                            "});"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Update Data by ID - 4",
+            "request": {
+                "method": "PUT",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"lastName\": \"Moon\",\n\t\"email\": \"moon@mail.com\"\n}"
+                },
+                "url": {
+                    "raw": "http://localhost:8080/api/v1/employees/4",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8080",
+                    "path": [
+                        "api",
+                        "v1",
+                        "employees",
+                        "4"
+                    ]
+                }
+            },
+            "response": [],
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "pm.test(\"Status code is 200\", function () {",
+                            "    pm.response.to.have.status(200);",
+                            "});",
+                            "",
+                            "pm.test(\"Response contains updated fields\", function () {",
+                            "    const jsonData = pm.response.json();",
+                            "    pm.expect(jsonData).to.have.property(\"lastName\", \"Moon\");",
+                            "    pm.expect(jsonData).to.have.property(\"email\", \"moon@mail.com\");",
+                            "});"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Update Data by ID - 2",
+            "request": {
+                "method": "PUT",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n\t\"email\": \"johnny@mail.com\"\n}"
+                },
+                "url": {
+                    "raw": "http://localhost:8080/api/v1/employees/2",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8080",
+                    "path": [
+                        "api",
+                        "v1",
+                        "employees",
+                        "2"
+                    ]
+                }
+            },
+            "response": [],
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "pm.test(\"Status code is 200\", function () {",
+                            "    pm.response.to.have.status(200);",
+                            "});",
+                            "",
+                            "pm.test(\"Response contains updated email\", function () {",
+                            "    const jsonData = pm.response.json();",
+                            "    pm.expect(jsonData).to.have.property(\"email\", \"johnny@mail.com\");",
+                            "});"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Retrieve Data by First Name",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "http://localhost:8080/api/v1/employees/first-name/Alice",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8080",
+                    "path": [
+                        "api",
+                        "v1",
+                        "employees",
+                        "first-name",
+                        "Alice"
+                    ]
+                }
+            },
+            "response": [],
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "pm.test(\"Status code is 200\", function () {",
+                            "    pm.response.to.have.status(200);",
+                            "});",
+                            "",
+                            "pm.test(\"Response is an array and contains at least one item\", function () {",
+                            "    const jsonData = pm.response.json();",
+                            "    pm.expect(jsonData).to.be.an('array').that.is.not.empty;",
+                            "});",
+                            "",
+                            "pm.test(\"Response contains correct first name\", function () {",
+                            "    const jsonData = pm.response.json();",
+                            "    pm.expect(jsonData[0]).to.have.property(\"firstName\", \"Alice\");",
+                            "});"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Retrieve Data by Last Name",
+            "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                    "raw": "http://localhost:8080/api/v1/employees/last-name/Man",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8080",
+                    "path": [
+                        "api",
+                        "v1",
+                        "employees",
+                        "last-name",
+                        "Man"
+                    ]
+                }
+            },
+            "response": [],
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "pm.test(\"Status code is 200\", function () {",
+                            "    pm.response.to.have.status(200);",
+                            "});",
+                            "",
+                            "pm.test(\"Response is an array and contains at least one item\", function () {",
+                            "    const jsonData = pm.response.json();",
+                            "    pm.expect(jsonData).to.be.an('array').that.is.not.empty;",
+                            "});",
+                            "",
+                            "pm.test(\"Response contains correct last name\", function () {",
+                            "    const jsonData = pm.response.json();",
+                            "    pm.expect(jsonData[0]).to.have.property(\"lastName\", \"Man\");",
+                            "});"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Delete Data by ID",
+            "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                    "raw": "http://localhost:8080/api/v1/employees/4",
+                    "protocol": "http",
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "8080",
+                    "path": [
+                        "api",
+                        "v1",
+                        "employees",
+                        "4"
+                    ]
+                }
+            },
+            "response": [],
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "pm.test(\"Status code is 204\", function () {",
+                            "    pm.response.to.have.status(204);",
+                            "});",
+                            "",
+                            "pm.test(\"Response body is empty\", function () {",
+                            "    pm.expect(pm.response.text()).to.be.empty;",
+                            "});"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ]
+        }
+    ]
+}
